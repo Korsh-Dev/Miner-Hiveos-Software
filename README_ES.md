@@ -4,7 +4,7 @@ Paquete oficial de integración para minar **Korsh Core (KSH)** con algoritmo **
 
 ---
 
-## 🚀 Configuración de Hoja de Vuelo (Flight Sheet) en HiveOS
+## 🚀 Configuración en HiveOS (Flight Sheet)
 
 1. En el panel de **HiveOS**, ve a **Flight Sheets** y crea una nueva:
    - **Coin**: `KSH`
@@ -16,7 +16,7 @@ Paquete oficial de integración para minar **Korsh Core (KSH)** con algoritmo **
 
 | Campo | Valor |
 | :--- | :--- |
-| **Miner name** | `korsh-miner-hiveos` *(o `korsh-miner`)* |
+| **Miner name** | `korsh-miner-hiveos` |
 | **Installation URL** | `https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.0/korsh-miner-hiveos-v1.0.0.tar.gz` |
 | **Hash algorithm** | `yespower` |
 | **Wallet and worker template** | `%WAL%.%WORKER_NAME%` |
@@ -24,7 +24,7 @@ Paquete oficial de integración para minar **Korsh Core (KSH)** con algoritmo **
 | **Pass** | `x` |
 | **Extra config arguments** | *(Opcional)* `--threads %CPU_THREADS%` |
 
-3. Haz clic en **Apply Changes**, nombra la Flight Sheet y presiona **Create Flight Sheet**.
+3. Haz clic en **Apply Changes**, guarda la Flight Sheet y aplícala a tu rig.
 
 ---
 

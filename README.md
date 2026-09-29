@@ -1,79 +1,72 @@
-# Korsh Miner [KSH] — Official HiveOS Custom Miner Integration
+# Korsh Miner [KSH] — HiveOS Custom Miner Integration
 
-Official high-performance **Yespower 1.0** CPU mining package for **Korsh Core (KSH)**, fully integrated with **HiveOS** as a native Custom Miner.
+Official high-performance **Yespower 1.0** CPU mining package for **Korsh Core (KSH)**, engineered specifically for **HiveOS**.
 
 ---
 
-## ⚡ Key Features
+## ⚡ HiveOS Integration Highlights
 
-- **Native HiveOS Telemetry**: Live Hashrate (**kH/s**), Accepted/Rejected shares, Uptime, and CPU temperatures directly in your HiveOS Web Dashboard and mobile app.
-- **Yespower 1.0 Engine**: Custom ASIC-resistant PoW algorithm engineered for Korsh Core.
-- **Automatic 2MB HugePages**: Auto-reserves huge pages upon launch to maximize hashing throughput on modern CPUs (Ryzen, EPYC, Threadripper, Intel Core i7/i9/Xeon).
-- **Statically Linked Binary**: Zero external library dependencies (`glibc`, `openssl`, or `curl` version conflicts are completely eliminated).
-- **Interactive Screen Console**: Full support for HiveOS `miner` command to stream live stratum logs, difficulty updates, and share confirmations.
+- **Native Dashboard Telemetry**: Real-time Hashrate (**kH/s**), Accepted/Rejected shares, Uptime, and CPU temperatures.
+- **Yespower 1.0 Engine**: Custom PoW algorithm optimized for modern multi-core processors.
+- **Automatic 2MB HugePages**: Automatically allocates memory pages to maximize throughput on Ryzen, EPYC, Threadripper, Intel Core & Xeon.
+- **Zero-Dependency Static Binary**: Self-contained 64-bit Linux executable (`korsh-miner-linux-x86_64`).
+- **Standard Screen Console**: Full support for HiveOS `miner` command.
 
 ---
 
 ## 🚀 HiveOS Flight Sheet Configuration
 
 ### Step 1: Create a Flight Sheet
-1. In your **HiveOS** web dashboard, navigate to **Flight Sheets** and click **Add Flight Sheet**.
-2. Set the following primary fields:
-   - **Coin**: `KSH` *(or create custom coin `KSH`)*
-   - **Wallet**: Select your Korsh wallet address *(starts with `S`, e.g., `SSJ4n8AFfGHqvE8LTTbVyykjRoNCAL9rte`)*
-   - **Pool**: Select **Configure in miner**
-   - **Miner**: Select **Custom**
+In your **HiveOS** dashboard, go to **Flight Sheets** -> **Add Flight Sheet**:
+- **Coin**: `KSH`
+- **Wallet**: Your Korsh wallet address *(starts with `S`, e.g., `SSJ4n8AFfGHqvE8LTTbVyykjRoNCAL9rte`)*
+- **Pool**: **Configure in miner**
+- **Miner**: **Custom**
 
-### Step 2: Configure the Custom Miner
-Click the yellow button **Setup Miner Config** and fill in the required parameters:
+### Step 2: Setup Miner Config
+Click **Setup Miner Config** and enter:
 
-| Parameter | Configuration Value |
+| Setting | Value |
 | :--- | :--- |
-| **Miner name** | `korsh-miner-hiveos` *(or `korsh-miner`)* |
+| **Miner name** | `korsh-miner-hiveos` |
 | **Installation URL** | `https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.0/korsh-miner-hiveos-v1.0.0.tar.gz` |
 | **Hash algorithm** | `yespower` |
 | **Wallet and worker template** | `%WAL%.%WORKER_NAME%` |
 | **Pool URL** | `stratum+tcp://pool.korsh.org:3333` |
 | **Pass** | `x` |
-| **Extra config arguments** | *(Optional)* `--threads %CPU_THREADS%` *(or leave blank for auto-detection)* |
+| **Extra config arguments** | *(Optional)* `--threads %CPU_THREADS%` *(or leave blank for auto-detect)* |
 
-> **Direct IP Pool Fallback**: If DNS resolution fails on your rig, you can use `stratum+tcp://195.26.244.209:3333` as the Pool URL.
+> **Direct IP Fallback**: If DNS is slow on your rig, you can use `stratum+tcp://195.26.244.209:3333` as Pool URL.
 
-### Step 3: Apply and Launch
-1. Click **Apply Changes**.
-2. Enter a name for the Flight Sheet (e.g., `Korsh KSH CPU Mining`).
-3. Click **Create Flight Sheet**.
-4. Apply the Flight Sheet to your workers using the rocket icon 🚀.
+### Step 3: Apply
+Click **Apply Changes**, name the Flight Sheet, and deploy it to your worker 🚀.
 
 ---
 
-## 💻 Manual Installation via SSH / Terminal (Alternative)
+## 💻 Manual Installation / Update via Terminal (SSH)
 
-If you prefer installing the package directly on the rig:
+Run this command inside your HiveOS shell (SSH or Shellinabox):
 
 ```bash
-# Download and install via HiveOS custom-get
 /hive/miners/custom/custom-get https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.0/korsh-miner-hiveos-v1.0.0.tar.gz -f
 ```
 
 ---
 
-## 📊 Live Monitoring & Commands
+## 📊 HiveOS Commands
 
-Once mining has started on your rig:
-
-- **`miner`**: Attaches to the miner's screen session to view live hashrate, incoming stratum jobs, difficulty changes, and accepted shares. Press `Ctrl+A, D` to detach.
-- **`miner log`**: Tails the latest lines of the log file.
-- **`miner restart`**: Restarts the custom miner process.
-- **`miner stop`**: Gracefully terminates mining.
+- **`miner`**: Attaches to the interactive screen session to view live hashrate, incoming stratum jobs, difficulty changes, and accepted shares. (`Ctrl+A, D` to detach).
+- **`miner log`**: View recent miner logs.
+- **`miner restart`**: Restart the miner.
+- **`miner stop`**: Stop mining.
 
 ---
 
 ## 🌐 Official Korsh Resources
 
-- **Official Mining Pool**: [https://pool.korsh.org/](https://pool.korsh.org/)
+- **Mining Pool (Web)**: [https://pool.korsh.org/](https://pool.korsh.org/)
 - **Pool Stratum Server**: `stratum+tcp://pool.korsh.org:3333` *(Direct IP: `stratum+tcp://195.26.244.209:3333`)*
 - **Block Explorer**: [https://explorer.korsh.org/](https://explorer.korsh.org/)
 - **Official Website**: [https://korsh.xyz](https://korsh.xyz)
-- **Telegram Community**: [https://t.me/korshcommunity](https://t.me/korshcommunity)
+- **Telegram**: [https://t.me/korshcommunity](https://t.me/korshcommunity)
 - **Discord**: [https://discord.gg/6xbqUWCDwu](https://discord.gg/6xbqUWCDwu)
