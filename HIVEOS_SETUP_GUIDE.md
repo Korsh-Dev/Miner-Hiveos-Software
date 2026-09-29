@@ -29,7 +29,7 @@ Click **Setup Miner Config** and enter:
 | Setting | Value |
 | :--- | :--- |
 | **Miner name** | `korsh-miner-hiveos` |
-| **Installation URL** | `https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.1/korsh-miner-hiveos-v1.0.1.tar.gz` |
+| **Installation URL** | `https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.2/korsh-miner-hiveos-v1.0.2.tar.gz` |
 | **Hash algorithm** | `yespower` |
 | **Wallet and worker template** | `%WAL%.%WORKER_NAME%` |
 | **Pool URL** | `stratum+tcp://pool.korsh.org:3333` |
@@ -43,12 +43,13 @@ Click **Apply Changes**, name the Flight Sheet, and deploy it to your worker �
 
 ---
 
-## 💻 Manual Installation / Update via Terminal (SSH)
+## 💻 Manual Installation / Clean Update via Terminal (SSH)
 
-Run this command inside your HiveOS shell (SSH or Shellinabox):
+If updating or resolving previous installation conflicts on a rig, run this command in your HiveOS shell:
 
 ```bash
-/hive/miners/custom/custom-get https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.1/korsh-miner-hiveos-v1.0.1.tar.gz -f
+rm -rf /hive/miners/custom/korsh-miner* /hive/miners/custom/h-run.sh /hive/miners/custom/h-*.sh /tmp/korsh-miner*
+/hive/miners/custom/custom-get https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.2/korsh-miner-hiveos-v1.0.2.tar.gz -f
 ```
 
 ---

@@ -7,7 +7,21 @@ set -e
 
 CUSTOM_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CUSTOM_NAME="$(basename "$CUSTOM_DIR")"
-. "$CUSTOM_DIR/h-manifest.conf" 2>/dev/null
+
+# If invoked directly from /hive/miners/custom, redirect to miner subdirectory
+if [[ "$CUSTOM_NAME" == "custom" ]]; then
+    if [[ -d "$CUSTOM_DIR/korsh-miner-hiveos" ]]; then
+        CUSTOM_NAME="korsh-miner-hiveos"
+        CUSTOM_DIR="$CUSTOM_DIR/korsh-miner-hiveos"
+    elif [[ -d "$CUSTOM_DIR/korsh-miner" ]]; then
+        CUSTOM_NAME="korsh-miner"
+        CUSTOM_DIR="$CUSTOM_DIR/korsh-miner"
+    fi
+fi
+
+if [[ -f "$CUSTOM_DIR/h-manifest.conf" ]]; then
+    . "$CUSTOM_DIR/h-manifest.conf" 2>/dev/null
+fi
 
 conf="${CUSTOM_CONFIG_FILENAME:-$CUSTOM_DIR/${CUSTOM_NAME}.conf}"
 mkdir -p "$(dirname "$conf")"

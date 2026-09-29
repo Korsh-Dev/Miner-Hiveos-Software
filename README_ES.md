@@ -17,7 +17,7 @@ Paquete oficial de integración para minar **Korsh Core (KSH)** con algoritmo **
 | Campo | Valor |
 | :--- | :--- |
 | **Miner name** | `korsh-miner-hiveos` |
-| **Installation URL** | `https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.1/korsh-miner-hiveos-v1.0.1.tar.gz` |
+| **Installation URL** | `https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.2/korsh-miner-hiveos-v1.0.2.tar.gz` |
 | **Hash algorithm** | `yespower` |
 | **Wallet and worker template** | `%WAL%.%WORKER_NAME%` |
 | **Pool URL** | `stratum+tcp://pool.korsh.org:3333` |
@@ -28,10 +28,13 @@ Paquete oficial de integración para minar **Korsh Core (KSH)** con algoritmo **
 
 ---
 
-## 💻 Instalación / Actualización Manual en Terminal (SSH)
+## 💻 Instalación / Limpieza Manual en Terminal (SSH)
+
+Si estás actualizando o solucionando conflictos previos en el rig, ejecuta este comando en la terminal de HiveOS:
 
 ```bash
-/hive/miners/custom/custom-get https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.1/korsh-miner-hiveos-v1.0.1.tar.gz -f
+rm -rf /hive/miners/custom/korsh-miner* /hive/miners/custom/h-run.sh /hive/miners/custom/h-*.sh /tmp/korsh-miner*
+/hive/miners/custom/custom-get https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.2/korsh-miner-hiveos-v1.0.2.tar.gz -f
 ```
 
 ---

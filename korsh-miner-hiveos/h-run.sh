@@ -7,12 +7,29 @@ CUSTOM_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$CUSTOM_DIR"
 CUSTOM_NAME="$(basename "$CUSTOM_DIR")"
 
-. "$CUSTOM_DIR/h-manifest.conf" 2>/dev/null
+# If invoked directly from /hive/miners/custom, redirect to miner subdirectory
+if [[ "$CUSTOM_NAME" == "custom" ]]; then
+    if [[ -d "$CUSTOM_DIR/korsh-miner-hiveos" ]]; then
+        CUSTOM_NAME="korsh-miner-hiveos"
+        CUSTOM_DIR="$CUSTOM_DIR/korsh-miner-hiveos"
+        cd "$CUSTOM_DIR"
+    elif [[ -d "$CUSTOM_DIR/korsh-miner" ]]; then
+        CUSTOM_NAME="korsh-miner"
+        CUSTOM_DIR="$CUSTOM_DIR/korsh-miner"
+        cd "$CUSTOM_DIR"
+    fi
+fi
+
+if [[ -f "$CUSTOM_DIR/h-manifest.conf" ]]; then
+    . "$CUSTOM_DIR/h-manifest.conf" 2>/dev/null
+fi
 
 conf="${CUSTOM_CONFIG_FILENAME:-$CUSTOM_DIR/${CUSTOM_NAME}.conf}"
 if [[ ! -f "$conf" ]]; then
     echo "[!] Config file not found. Generating default..."
-    ./h-config.sh
+    if [[ -x "./h-config.sh" ]]; then
+        ./h-config.sh
+    fi
 fi
 
 if [[ -f "$conf" ]]; then
@@ -22,18 +39,21 @@ else
     exit 1
 fi
 
-# Locate executable binary
-BIN="./korsh-miner-linux-x86_64"
-if [[ ! -x "$BIN" ]]; then
-    if [[ -x "./korsh-miner" ]]; then
-        BIN="./korsh-miner"
-    else
-        chmod +x "$BIN" ./korsh-miner 2>/dev/null || true
+# Locate executable binary (MUST be a regular file, NEVER a directory)
+BIN=""
+for candidate in     "$CUSTOM_DIR/korsh-miner-linux-x86_64"     "$CUSTOM_DIR/korsh-miner-hiveos/korsh-miner-linux-x86_64"     "$CUSTOM_DIR/korsh-miner/korsh-miner-linux-x86_64"     "/hive/miners/custom/korsh-miner-hiveos/korsh-miner-linux-x86_64"     "/hive/miners/custom/korsh-miner/korsh-miner-linux-x86_64"     "$CUSTOM_DIR/korsh-miner"     "/hive/miners/custom/korsh-miner-hiveos/korsh-miner"     "/hive/miners/custom/korsh-miner/korsh-miner"; do
+    if [[ -f "$candidate" && ! -d "$candidate" ]]; then
+        chmod +x "$candidate" 2>/dev/null || true
+        if [[ -x "$candidate" ]]; then
+            BIN="$candidate"
+            break
+        fi
     fi
-fi
+done
 
-if [[ ! -x "$BIN" ]]; then
+if [[ -z "$BIN" || ! -f "$BIN" || ! -x "$BIN" ]]; then
     echo "[!] Fatal: Miner binary not found or not executable!"
+    echo "    Searched in: $CUSTOM_DIR and /hive/miners/custom/"
     exit 1
 fi
 
@@ -67,6 +87,7 @@ echo "          KORSH [KSH] CPU MINER — HIVEOS WORKER             "
 echo "============================================================"
 echo "Coin:       Korsh (KSH)"
 echo "Algorithm:  Yespower 1.0"
+echo "Binary:     $BIN"
 echo "Pool:       $POOL"
 echo "Worker:     $USER"
 echo "Command:    ${cmd[*]}"
