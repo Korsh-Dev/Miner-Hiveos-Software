@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+CUSTOM_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [[ -x "$CUSTOM_DIR/h-config.sh" ]]; then
+    exec "$CUSTOM_DIR/h-config.sh"
+elif [[ -x "/hive/miners/custom/korsh-miner-hiveos/h-config.sh" ]]; then
+    exec "/hive/miners/custom/korsh-miner-hiveos/h-config.sh"
+elif [[ -x "./h-config.sh" ]]; then
+    exec ./h-config.sh
+fi
