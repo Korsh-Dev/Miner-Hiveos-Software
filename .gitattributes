@@ -2,6 +2,9 @@
 *.sh text eol=lf
 *.conf text eol=lf
 *.md text eol=lf
+miner_ver text eol=lf
+miner_config_gen text eol=lf
 korsh-miner binary
 korsh-miner-linux-x86_64 binary
 *.tar.gz binary
+*.deb binary
