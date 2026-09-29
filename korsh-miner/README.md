@@ -30,14 +30,14 @@ Click the yellow button **Setup Miner Config** and fill in the required paramete
 | Parameter | Configuration Value |
 | :--- | :--- |
 | **Miner name** | `korsh-miner` |
-| **Installation URL** | `https://your-domain-or-github/korsh-miner-hiveos-v1.0.0.tar.gz` |
+| **Installation URL** | `https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.0/korsh-miner-hiveos-v1.0.0.tar.gz` |
 | **Hash algorithm** | `yespower` |
 | **Wallet and worker template** | `%WAL%.%WORKER_NAME%` |
-| **Pool URL** | `stratum+tcp://korsh.xyz:3333` |
+| **Pool URL** | `stratum+tcp://pool.korsh.org:3333` |
 | **Pass** | `x` |
 | **Extra config arguments** | *(Optional)* `--threads %CPU_THREADS%` *(or leave blank for auto-detection)* |
 
-> **Direct IP Pool Fallback**: If DNS resolution fails on your rig, you can use `stratum+tcp://91.134.239.145:3333` as the Pool URL.
+> **Direct IP Pool Fallback**: If DNS resolution fails on your rig, you can use `stratum+tcp://195.26.244.209:3333` as the Pool URL.
 
 ### Step 3: Apply and Launch
 1. Click **Apply Changes**.
@@ -56,7 +56,7 @@ If you prefer installing the package directly on the rig without hosting the `.t
 cd /hive/miners/custom
 
 # 2. Download or upload the package to the rig
-wget https://your-server/korsh-miner-hiveos-v1.0.0.tar.gz -O korsh-miner.tar.gz
+wget https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.0/korsh-miner-hiveos-v1.0.0.tar.gz -O korsh-miner.tar.gz
 
 # 3. Unpack the custom miner
 tar -zxf korsh-miner.tar.gz
@@ -82,8 +82,9 @@ Once mining has started on your rig:
 
 ## 🌐 Official Korsh Resources
 
-- **Website & Pool**: [https://korsh.xyz](https://korsh.xyz)
-- **Official Pool Stratum**: `stratum+tcp://korsh.xyz:3333`
-- **Block Explorer**: [https://korsh.195-26-244-209.sslip.io/](https://korsh.195-26-244-209.sslip.io/)
+- **Official Mining Pool**: [https://pool.korsh.org/](https://pool.korsh.org/)
+- **Pool Stratum Server**: `stratum+tcp://pool.korsh.org:3333` *(Direct IP: `stratum+tcp://195.26.244.209:3333`)*
+- **Block Explorer**: [https://explorer.korsh.org/](https://explorer.korsh.org/)
+- **Official Website**: [https://korsh.xyz](https://korsh.xyz)
 - **Telegram Community**: [https://t.me/korshcommunity](https://t.me/korshcommunity)
 - **Discord**: [https://discord.gg/6xbqUWCDwu](https://discord.gg/6xbqUWCDwu)

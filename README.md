@@ -11,8 +11,8 @@
 
 <p align="center">
   <a href="https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases"><img src="https://img.shields.io/github/v/release/Korsh-Dev/Miner-Hiveos-Software?style=flat-square&color=00CC52" alt="Release"></a>
-  <a href="https://korsh.xyz"><img src="https://img.shields.io/badge/Pool-korsh.xyz-5CC8FF?style=flat-square" alt="Pool"></a>
-  <a href="https://korsh.195-26-244-209.sslip.io/"><img src="https://img.shields.io/badge/Explorer-Live-00CC52?style=flat-square" alt="Explorer"></a>
+  <a href="https://pool.korsh.org/"><img src="https://img.shields.io/badge/Pool-pool.korsh.org-5CC8FF?style=flat-square" alt="Pool"></a>
+  <a href="https://explorer.korsh.org/"><img src="https://img.shields.io/badge/Explorer-explorer.korsh.org-00CC52?style=flat-square" alt="Explorer"></a>
   <a href="https://t.me/korshcommunity"><img src="https://img.shields.io/badge/Telegram-Community-5CC8FF?style=flat-square" alt="Telegram"></a>
   <a href="https://discord.gg/6xbqUWCDwu"><img src="https://img.shields.io/badge/Discord-Official-BB86FC?style=flat-square" alt="Discord"></a>
   <img src="https://img.shields.io/badge/Algorithm-Yespower%201.0-FFB300?style=flat-square" alt="Algorithm">
@@ -50,12 +50,11 @@ Click the **Setup Miner Config** button and enter:
 | **Installation URL** | `https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.0/korsh-miner-hiveos-v1.0.0.tar.gz` |
 | **Hash algorithm** | `yespower` |
 | **Wallet and worker template** | `%WAL%.%WORKER_NAME%` |
-| **Pool URL** | `stratum+tcp://korsh.xyz:3333` |
+| **Pool URL** | `stratum+tcp://pool.korsh.org:3333` |
 | **Pass** | `x` |
 | **Extra config arguments** | *(Optional)* `--threads %CPU_THREADS%` *(or leave empty for auto-detect)* |
 
-> **Alternative URL**: You can also use the rolling release URL:  
-> `https://raw.githubusercontent.com/Korsh-Dev/Miner-Hiveos-Software/main/korsh-miner-hiveos-v1.0.0.tar.gz`
+> **Direct IP Pool Fallback**: If DNS resolution fails on your rig, you can use `stratum+tcp://195.26.244.209:3333` as the Pool URL.
 
 3. Click **Apply Changes**, name the Flight Sheet, and deploy it to your worker(s) 🚀.
 
@@ -91,8 +90,9 @@ Run these directly inside your HiveOS shell (SSH or Shellinabox):
 
 ## 🌐 Official Links
 
+* **Official Mining Pool**: [https://pool.korsh.org/](https://pool.korsh.org/)
+* **Pool Stratum Server**: `stratum+tcp://pool.korsh.org:3333` *(Direct IP: `stratum+tcp://195.26.244.209:3333`)*
+* **Block Explorer**: [https://explorer.korsh.org/](https://explorer.korsh.org/)
 * **Official Website**: [https://korsh.xyz](https://korsh.xyz)
-* **Block Explorer**: [https://korsh.195-26-244-209.sslip.io/](https://korsh.195-26-244-209.sslip.io/)
-* **Official Pool**: `stratum+tcp://korsh.xyz:3333` (Fallback IP: `stratum+tcp://91.134.239.145:3333`)
 * **Telegram**: [https://t.me/korshcommunity](https://t.me/korshcommunity)
 * **Discord**: [https://discord.gg/6xbqUWCDwu](https://discord.gg/6xbqUWCDwu)

@@ -36,13 +36,16 @@ if [[ ! -x "$BIN" ]]; then
 fi
 
 # Optimization: Auto-enable HugePages for Yespower algorithm
+ncpus=$(nproc 2>/dev/null || echo 4)
+pages=$(( ncpus + 8 ))
+if [[ -w /proc/sys/vm/nr_hugepages ]]; then
+    echo $pages > /proc/sys/vm/nr_hugepages 2>/dev/null || true
+fi
 if command -v sysctl >/dev/null 2>&1; then
-    ncpus=$(nproc 2>/dev/null || echo 4)
-    pages=$(( ncpus + 8 ))
     sysctl -w vm.nr_hugepages=$pages >/dev/null 2>&1 || true
 fi
 
-# Setup log directory and initialize log file
+# Setup log directory and clean log on fresh start
 log_dir="$(dirname "$CUSTOM_LOG_BASENAME")"
 mkdir -p "$log_dir"
 log_file="${CUSTOM_LOG_BASENAME}.log"

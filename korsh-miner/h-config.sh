@@ -5,28 +5,28 @@
 
 set -e
 
-# Source manifest if available
 . /hive/miners/custom/korsh-miner/h-manifest.conf 2>/dev/null
 
 conf="${CUSTOM_CONFIG_FILENAME:-/hive/miners/custom/korsh-miner/korsh-miner.conf}"
 mkdir -p "$(dirname "$conf")"
 
-# 1. Pool URL
+# 1. Pool URL - Sanitization for korsh-miner binary
 pool="${CUSTOM_URL}"
 if [[ -z "$pool" ]]; then
-    pool="stratum+tcp://korsh.xyz:3333"
+    pool="stratum+tcp://pool.korsh.org:3333"
 fi
 
-# Ensure stratum+tcp:// prefix
-if [[ "$pool" != stratum+tcp://* && "$pool" != stratum://* ]]; then
-    pool="stratum+tcp://$pool"
-fi
+# Strip any existing protocol prefix (http://, stratum://, tcp://, etc.)
+clean_host_port=$(echo "$pool" | sed -E 's#^[a-zA-Z0-9+]+://##')
+pool="stratum+tcp://${clean_host_port}"
 
 # 2. Wallet & Worker template
 user="${CUSTOM_TEMPLATE}"
 if [[ -z "$user" ]]; then
     user="SSJ4n8AFfGHqvE8LTTbVyykjRoNCAL9rte.worker1"
 fi
+# Ensure clean address.worker formatting (replace slash with dot)
+user=$(echo "$user" | tr '/' '.')
 
 # 3. Password
 pass="${CUSTOM_PASS:-x}"
@@ -46,4 +46,4 @@ ALGO="$algo"
 USER_CONFIG="$user_config"
 EOF
 
-echo "[+] Korsh Miner config saved to: $conf"
+echo "[+] Korsh Miner config saved to: $conf (Pool: $pool | User: $user)"

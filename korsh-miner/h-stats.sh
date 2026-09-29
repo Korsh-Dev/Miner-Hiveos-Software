@@ -17,7 +17,7 @@ stats='{"hs":[0],"hs_units":"khs","temp":[],"fan":[],"uptime":0,"ar":[0,0],"algo
 if [[ -f "$log_file" ]]; then
     if command -v python3 >/dev/null 2>&1; then
         eval "$(python3 -c '
-import os, sys, time, json, re
+import os, sys, time, json, re, subprocess
 
 log_path = sys.argv[1]
 algo = sys.argv[2] if len(sys.argv) > 2 else "yespower"
@@ -27,11 +27,20 @@ acc = 0
 rej = 0
 uptime = 0
 
+# Get process uptime
+try:
+    pids = [int(p) for p in subprocess.check_output(["pgrep", "-f", "korsh-miner"], stderr=subprocess.DEVNULL).split()]
+    if pids:
+        pid = pids[0]
+        out = subprocess.check_output(["ps", "-o", "etimes=", "-p", str(pid)], stderr=subprocess.DEVNULL).decode().strip()
+        uptime = int(out.split()[0])
+except Exception:
+    if os.path.exists(log_path):
+        uptime = int(max(0, time.time() - os.path.getctime(log_path)))
+
+# Parse latest hashrate and shares from log
 try:
     if os.path.exists(log_path):
-        ctime = os.path.getctime(log_path)
-        uptime = int(max(0, time.time() - ctime))
-        
         with open(log_path, "r", encoding="utf-8", errors="ignore") as f:
             lines = f.readlines()[-80:]
         
@@ -47,15 +56,27 @@ try:
 except Exception:
     pass
 
+# Retrieve CPU temperature (HiveOS cpu-temp tool or thermal zones)
 temp = []
-if os.path.exists("/sys/class/thermal/thermal_zone0/temp"):
-    try:
-        with open("/sys/class/thermal/thermal_zone0/temp") as f:
-            t = int(f.read().strip()) // 1000
-            if 0 < t < 120:
-                temp.append(t)
-    except Exception:
-        pass
+try:
+    t_out = subprocess.check_output(["cpu-temp"], stderr=subprocess.DEVNULL, timeout=2).decode().strip()
+    t_val = int(float(t_out.split()[0]))
+    if 0 < t_val < 125:
+        temp.append(t_val)
+except Exception:
+    pass
+
+if not temp:
+    for z in ["/sys/class/thermal/thermal_zone0/temp", "/sys/class/thermal/thermal_zone1/temp"]:
+        if os.path.exists(z):
+            try:
+                with open(z) as f:
+                    v = int(f.read().strip()) // 1000
+                    if 0 < v < 125:
+                        temp.append(v)
+                        break
+            except Exception:
+                pass
 
 stats_dict = {
     "hs": [round(khs, 3)],
@@ -68,23 +89,23 @@ stats_dict = {
 }
 
 print(f"khs={round(khs, 3)}")
-print(f"stats='{json.dumps(stats_dict)}'")
+print(f"stats=\x27{json.dumps(stats_dict)}\x27")
 ' "$log_file" "yespower" 2>/dev/null)"
     else
         last_stat=$(grep -E 'rate=[0-9.]+' "$log_file" | tail -n 1)
         if [[ -n "$last_stat" ]]; then
-            khs_val=$(echo "$last_stat" | sed -n 's/.*rate=\([0-9.]*\).*//p')
+            khs_val=$(echo "$last_stat" | sed -n 's/.*rate=\([0-9.]*\).*/\1/p')
             is_hs=$(echo "$last_stat" | grep -q ' H/s' && echo 1 || echo 0)
             if [[ "$is_hs" -eq 1 ]]; then
                 khs=$(awk "BEGIN {print $khs_val / 1000.0}")
             else
                 khs=$khs_val
             fi
-            acc=$(echo "$last_stat" | sed -n 's/.*accepted=\([0-9]*\).*//p')
-            rej=$(echo "$last_stat" | sed -n 's/.*rejected=\([0-9]*\).*//p')
+            acc=$(echo "$last_stat" | sed -n 's/.*accepted=\([0-9]*\).*/\1/p')
+            rej=$(echo "$last_stat" | sed -n 's/.*rejected=\([0-9]*\).*/\1/p')
             acc=${acc:-0}
             rej=${rej:-0}
-            stats="{"hs":[$khs],"hs_units":"khs","temp":[],"fan":[],"uptime":0,"ar":[$acc,$rej],"algo":"yespower"}"
+            stats="{\"hs\":[$khs],\"hs_units\":\"khs\",\"temp\":[],\"fan\":[],\"uptime\":0,\"ar\":[$acc,$rej],\"algo\":\"yespower\"}"
         fi
     fi
 fi

@@ -17,10 +17,10 @@ Paquete oficial de integración para minar **Korsh Core (KSH)** con algoritmo **
 | Campo | Valor |
 | :--- | :--- |
 | **Miner name** | `korsh-miner` |
-| **Installation URL** | `https://tu-servidor/korsh-miner-hiveos-v1.0.0.tar.gz` |
+| **Installation URL** | `https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.0/korsh-miner-hiveos-v1.0.0.tar.gz` |
 | **Hash algorithm** | `yespower` |
 | **Wallet and worker template** | `%WAL%.%WORKER_NAME%` |
-| **Pool URL** | `stratum+tcp://korsh.xyz:3333` |
+| **Pool URL** | `stratum+tcp://pool.korsh.org:3333` |
 | **Pass** | `x` |
 | **Extra config arguments** | *(Opcional)* `--threads %CPU_THREADS%` |
 
@@ -28,7 +28,8 @@ Paquete oficial de integración para minar **Korsh Core (KSH)** con algoritmo **
 
 ---
 
-## 📊 Monitoreo
+## 🌐 Enlaces Oficiales
 
-- Escribe `miner` en la consola SSH para ver la pantalla en vivo.
-- El Hashrate y los shares se reflejarán automáticamente en el panel web y la app móvil de HiveOS.
+- **Pool de Minería**: [https://pool.korsh.org/](https://pool.korsh.org/)
+- **Servidor Stratum**: `stratum+tcp://pool.korsh.org:3333`
+- **Explorador de Bloques**: [https://explorer.korsh.org/](https://explorer.korsh.org/)
