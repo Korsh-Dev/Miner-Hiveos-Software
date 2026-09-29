@@ -16,7 +16,7 @@ Paquete oficial de integración para minar **Korsh Core (KSH)** con algoritmo **
 
 | Campo | Valor |
 | :--- | :--- |
-| **Miner name** | `korsh-miner` |
+| **Miner name** | `korsh-miner-hiveos` *(o `korsh-miner`)* |
 | **Installation URL** | `https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.0/korsh-miner-hiveos-v1.0.0.tar.gz` |
 | **Hash algorithm** | `yespower` |
 | **Wallet and worker template** | `%WAL%.%WORKER_NAME%` |

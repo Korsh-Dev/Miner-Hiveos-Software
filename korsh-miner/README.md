@@ -29,7 +29,7 @@ Click the yellow button **Setup Miner Config** and fill in the required paramete
 
 | Parameter | Configuration Value |
 | :--- | :--- |
-| **Miner name** | `korsh-miner` |
+| **Miner name** | `korsh-miner-hiveos` *(or `korsh-miner`)* |
 | **Installation URL** | `https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.0/korsh-miner-hiveos-v1.0.0.tar.gz` |
 | **Hash algorithm** | `yespower` |
 | **Wallet and worker template** | `%WAL%.%WORKER_NAME%` |
@@ -49,22 +49,11 @@ Click the yellow button **Setup Miner Config** and fill in the required paramete
 
 ## 💻 Manual Installation via SSH / Terminal (Alternative)
 
-If you prefer installing the package directly on the rig without hosting the `.tar.gz` archive on a public server:
+If you prefer installing the package directly on the rig:
 
 ```bash
-# 1. Access your rig terminal (SSH or Shellinabox)
-cd /hive/miners/custom
-
-# 2. Download or upload the package to the rig
-wget https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.0/korsh-miner-hiveos-v1.0.0.tar.gz -O korsh-miner.tar.gz
-
-# 3. Unpack the custom miner
-tar -zxf korsh-miner.tar.gz
-
-# 4. Ensure execution permissions
-chmod +x /hive/miners/custom/korsh-miner/*.sh /hive/miners/custom/korsh-miner/korsh-miner*
-
-# 5. Launch the miner via Flight Sheet
+# Download and install via HiveOS custom-get
+/hive/miners/custom/custom-get https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.0/korsh-miner-hiveos-v1.0.0.tar.gz -f
 ```
 
 ---
@@ -74,7 +63,7 @@ chmod +x /hive/miners/custom/korsh-miner/*.sh /hive/miners/custom/korsh-miner/ko
 Once mining has started on your rig:
 
 - **`miner`**: Attaches to the miner's screen session to view live hashrate, incoming stratum jobs, difficulty changes, and accepted shares. Press `Ctrl+A, D` to detach.
-- **`miner log`**: Tails the latest lines of `/var/log/miner/custom/korsh-miner/korsh-miner.log`.
+- **`miner log`**: Tails the latest lines of the log file.
 - **`miner restart`**: Restarts the custom miner process.
 - **`miner stop`**: Gracefully terminates mining.
 
