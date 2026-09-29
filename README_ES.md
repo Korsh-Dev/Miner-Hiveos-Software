@@ -17,7 +17,7 @@ Paquete oficial de integración para minar **Korsh Core (KSH)** con algoritmo **
 | Campo | Valor |
 | :--- | :--- |
 | **Miner name** | `korsh-miner-hiveos` |
-| **Installation URL** | `https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.0/korsh-miner-hiveos-v1.0.0.tar.gz` |
+| **Installation URL** | `https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.1/korsh-miner-hiveos-v1.0.1.tar.gz` |
 | **Hash algorithm** | `yespower` |
 | **Wallet and worker template** | `%WAL%.%WORKER_NAME%` |
 | **Pool URL** | `stratum+tcp://pool.korsh.org:3333` |
@@ -25,6 +25,14 @@ Paquete oficial de integración para minar **Korsh Core (KSH)** con algoritmo **
 | **Extra config arguments** | *(Opcional)* `--threads %CPU_THREADS%` |
 
 3. Haz clic en **Apply Changes**, guarda la Flight Sheet y aplícala a tu rig.
+
+---
+
+## 💻 Instalación / Actualización Manual en Terminal (SSH)
+
+```bash
+/hive/miners/custom/custom-get https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.1/korsh-miner-hiveos-v1.0.1.tar.gz -f
+```
 
 ---
 

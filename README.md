@@ -29,7 +29,7 @@ Click **Setup Miner Config** and enter:
 | Setting | Value |
 | :--- | :--- |
 | **Miner name** | `korsh-miner-hiveos` |
-| **Installation URL** | `https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.0/korsh-miner-hiveos-v1.0.0.tar.gz` |
+| **Installation URL** | `https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.1/korsh-miner-hiveos-v1.0.1.tar.gz` |
 | **Hash algorithm** | `yespower` |
 | **Wallet and worker template** | `%WAL%.%WORKER_NAME%` |
 | **Pool URL** | `stratum+tcp://pool.korsh.org:3333` |
@@ -48,7 +48,7 @@ Click **Apply Changes**, name the Flight Sheet, and deploy it to your worker ðŸš
 Run this command inside your HiveOS shell (SSH or Shellinabox):
 
 ```bash
-/hive/miners/custom/custom-get https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.0/korsh-miner-hiveos-v1.0.0.tar.gz -f
+/hive/miners/custom/custom-get https://github.com/Korsh-Dev/Miner-Hiveos-Software/releases/download/v1.0.1/korsh-miner-hiveos-v1.0.1.tar.gz -f
 ```
 
 ---
